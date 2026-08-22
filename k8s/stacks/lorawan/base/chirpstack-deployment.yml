@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: chirpstack
-          image: docker.io/chirpstack/chirpstack:4.9.0
+          image: docker.io/chirpstack/chirpstack:4.11.0
           args: ["-c", "/etc/chirpstack"]
           volumeMounts:
             - name: config
