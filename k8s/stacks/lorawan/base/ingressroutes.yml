@@ -25,6 +25,12 @@ spec:
   entryPoints:
     - websecure
   routes:
+    - match: (Host(`eu1.lorawan.qtrn.io`) || Host(`eu1.lorawan.brad.technology`)) && PathPrefix(`/api`)
+      kind: Rule
+      priority: 80
+      services:
+        - name: chirpstack
+          port: 8090
     - match: Host(`eu1.lorawan.qtrn.io`) || Host(`eu1.lorawan.brad.technology`)
       kind: Rule
       priority: 50

@@ -30,6 +30,19 @@ spec:
             limits:
               cpu: 1000m
               memory: 1Gi
+        - name: chirpstack-rest-api
+          image: docker.io/chirpstack/chirpstack-rest-api:4.11.0
+          args: ["--server", "127.0.0.1:8080", "--bind", "0.0.0.0:8090", "--insecure"]
+          ports:
+            - name: rest-api
+              containerPort: 8090
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
       volumes:
         - name: config
           configMap:
@@ -47,3 +60,6 @@ spec:
     - name: http
       port: 8080
       targetPort: 8080
+    - name: rest-api
+      port: 8090
+      targetPort: 8090
