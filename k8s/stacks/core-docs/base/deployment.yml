@@ -40,7 +40,7 @@ spec:
               memory: 128Mi
           livenessProbe:
             httpGet:
-              path: /
+              path: /core/
               port: http
             initialDelaySeconds: 10
             periodSeconds: 15
@@ -48,7 +48,7 @@ spec:
             failureThreshold: 3
           readinessProbe:
             httpGet:
-              path: /
+              path: /core/
               port: http
             initialDelaySeconds: 5
             periodSeconds: 10
