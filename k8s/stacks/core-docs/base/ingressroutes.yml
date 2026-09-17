@@ -16,7 +16,7 @@ spec:
       services:
         - name: core-docs
           port: 80
-    - match: (Host(`doc.quatrain.community`) || Host(`docs.quatrain.community`)) && Path(`/`)
+    - match: Host(`doc.quatrain.community`) || Host(`docs.quatrain.community`)
       kind: Rule
       priority: 50
       services:
@@ -43,7 +43,7 @@ spec:
       services:
         - name: core-docs
           port: 80
-    - match: (Host(`docs.eu1.paris.qtrn.io`) || Host(`docs.qtrn.io`)) && Path(`/`)
+    - match: Host(`docs.eu1.paris.qtrn.io`) || Host(`docs.qtrn.io`)
       kind: Rule
       priority: 50
       services:
