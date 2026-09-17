@@ -13,23 +13,25 @@ log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
+CONTEXT="${KUBECONTEXT:-admin@eu1-paris-qtrn-io}"
+
 log_info "================================================================="
 log_info "Deploying Workload: Quatrain Core Documentation Stack"
-log_info "Cluster: $(kubectl config current-context) | Namespace: docs"
+log_info "Cluster: ${CONTEXT} | Namespace: docs"
 log_info "Domains: doc.quatrain.community (alias: docs.quatrain.community, docs.qtrn.io)"
 log_info "================================================================="
 
 # 1. Apply stack manifests
 log_info "Applying Kubernetes manifests (Deployment, Service, Certificate, IngressRoute)..."
-kubectl apply -k "${REPO_ROOT}/k8s/stacks/core-docs/base"
+kubectl --context "${CONTEXT}" apply -k "${REPO_ROOT}/k8s/stacks/core-docs/base"
 
 # 2. Register ArgoCD Application
 log_info "Registering continuous GitOps delivery in ArgoCD..."
-kubectl apply -f "${REPO_ROOT}/k8s/argocd/core-docs-application.yml"
+kubectl --context "${CONTEXT}" apply -f "${REPO_ROOT}/k8s/argocd/core-docs-application.yml"
 
 # 3. Wait for rollouts
 log_info "Waiting for core-docs rollout..."
-kubectl rollout status -n docs deployment/core-docs --timeout=120s
+kubectl --context "${CONTEXT}" rollout status -n docs deployment/core-docs --timeout=120s
 
 log_success "Quatrain Core Documentation Stack deployed successfully!"
 echo ""
@@ -40,4 +42,4 @@ echo "• Fallback Internal URL: https://docs.eu1.paris.qtrn.io"
 echo "• Fallback Alias:        https://docs.qtrn.io"
 echo ""
 echo -e "${BOLD}=== SSL Certificates Status ===${NC}"
-kubectl get certificate -n docs
+kubectl --context "${CONTEXT}" get certificate -n docs
