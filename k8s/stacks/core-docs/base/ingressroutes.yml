@@ -1,0 +1,39 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: doc-quatrain-community-web
+  namespace: docs
+  labels:
+    app.kubernetes.io/name: core-docs
+    app.kubernetes.io/part-of: quatrain-community
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`doc.quatrain.community`) || Host(`docs.quatrain.community`)
+      kind: Rule
+      services:
+        - name: core-docs
+          port: 80
+  tls:
+    secretName: doc-quatrain-community-tls
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: docs-qtrn-io-web
+  namespace: docs
+  labels:
+    app.kubernetes.io/name: core-docs
+    app.kubernetes.io/part-of: quatrain-community
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`docs.eu1.paris.qtrn.io`) || Host(`docs.qtrn.io`)
+      kind: Rule
+      services:
+        - name: core-docs
+          port: 80
+  tls:
+    secretName: docs-qtrn-io-tls
