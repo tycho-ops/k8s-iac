@@ -6,6 +6,7 @@ resources:
   - https://raw.githubusercontent.com/argoproj-labs/argocd-image-updater/v0.12.2/manifests/install.yaml
   - argocd-ingressroute.yml
   - lorawan-applicationset.yml
+  - core-docs-application.yml
 patches:
   - target:
       kind: ConfigMap

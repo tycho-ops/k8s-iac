@@ -1,0 +1,35 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: doc-quatrain-community-cert
+  namespace: docs
+  labels:
+    app.kubernetes.io/name: core-docs
+    app.kubernetes.io/part-of: quatrain-community
+spec:
+  secretName: doc-quatrain-community-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: doc.quatrain.community
+  dnsNames:
+    - doc.quatrain.community
+    - docs.quatrain.community
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: docs-qtrn-io-cert
+  namespace: docs
+  labels:
+    app.kubernetes.io/name: core-docs
+    app.kubernetes.io/part-of: quatrain-community
+spec:
+  secretName: docs-qtrn-io-tls
+  issuerRef:
+    name: letsencrypt-prod
+    kind: ClusterIssuer
+  commonName: docs.eu1.paris.qtrn.io
+  dnsNames:
+    - docs.eu1.paris.qtrn.io
+    - docs.qtrn.io
