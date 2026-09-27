@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/tycho-ops/k8s-iac.git
-    targetRevision: main
+    targetRevision: feat/forgejo-git-stack
     path: k8s/stacks/forgejo/base
   destination:
     server: https://kubernetes.default.svc
