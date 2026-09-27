@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: forgejo
+  namespace: git
+  labels:
+    app.kubernetes.io/name: forgejo
+    app.kubernetes.io/part-of: git-qtrn-io
+spec:
+  type: ClusterIP
+  selector:
+    app.kubernetes.io/name: forgejo
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+    - name: ssh
+      port: 22
+      targetPort: 2222

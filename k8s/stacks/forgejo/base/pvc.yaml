@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: forgejo-data-pvc
+  namespace: git
+  labels:
+    app.kubernetes.io/name: forgejo
+    app.kubernetes.io/part-of: git-qtrn-io
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: sbs-default
+  resources:
+    requests:
+      storage: 20Gi

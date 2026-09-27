@@ -1,0 +1,20 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: forgejo-web
+  namespace: git
+  labels:
+    app.kubernetes.io/name: forgejo
+    app.kubernetes.io/part-of: git-qtrn-io
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`git.qtrn.io`)
+      kind: Rule
+      priority: 100
+      services:
+        - name: forgejo
+          port: 3000
+  tls:
+    secretName: git-tls

@@ -46,5 +46,5 @@ module "dns" {
   dns_zone       = var.dns_zone
   lb_public_ip   = module.network.public_ip
   lb_public_ipv6 = module.network.public_ipv6
-  subdomains     = ["@", "*", "eu1.paris", "*.eu1.paris", "argocd.eu1.paris", "eu1.lorawan"]
+  subdomains     = ["@", "*", "eu1.paris", "*.eu1.paris", "argocd.eu1.paris", "eu1.lorawan", "*.m2m", "eu1.lorawan.m2m", "git"]
 }

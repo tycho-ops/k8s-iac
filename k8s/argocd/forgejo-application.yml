@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: git-forge
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: git-forge
+    app.kubernetes.io/part-of: qtrn-io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/tycho-ops/k8s-iac.git
+    targetRevision: main
+    path: k8s/stacks/forgejo/base
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: git
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
